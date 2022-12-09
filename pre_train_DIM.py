@@ -74,13 +74,7 @@ if __name__ == '__main__':
     epoch_restart = 0
     root = None
 
-    if epoch_restart is not None and root is not None:
-        enc_file = root / Path('encoder' + str(epoch_restart) + '.wgt')
-        loss_file = root / Path('loss' + str(epoch_restart) + '.wgt')
-        encoder.load_state_dict(torch.load(str(enc_file)))
-        loss_fn.load_state_dict(torch.load(str(loss_file)))
-
-    for epoch in range(epoch_restart + 1, 1000):
+    for epoch in range(epoch_restart + 1, 50):
         batch = tqdm(cifar_10_train_l, total=len(cifar_10_train_dt) // batch_size)
         train_loss = []
         for x, target in batch:
@@ -98,10 +92,5 @@ if __name__ == '__main__':
             optim.step()
             loss_optim.step()
 
-        if epoch % 10 == 0:
-            root = Path(r'c:\data\deepinfomax\models\run5')
-            enc_file = root / Path('encoder' + str(epoch) + '.wgt')
-            loss_file = root / Path('loss' + str(epoch) + '.wgt')
-            enc_file.parent.mkdir(parents=True, exist_ok=True)
-            torch.save(encoder.state_dict(), str(enc_file))
-            torch.save(loss_fn.state_dict(), str(loss_file))
+    torch.save(encoder.state_dict(), os.path.join("./stored","DIM"+".pth"))
+
