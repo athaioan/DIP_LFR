@@ -74,6 +74,31 @@ class Encoder(nn.Module):
         encoded = self.l1(h.view(x.shape[0], -1))
         return encoded, features
 
+class Decoder(nn.Module):
+    def __init__(self):
+
+        super().__init__()
+        self.c0 = nn.ConvTranspose2d(64, 3, kernel_size=4, stride=1)
+        self.c1 = nn.ConvTranspose2d(128, 64, kernel_size=4, stride=1)
+        self.c2 = nn.ConvTranspose2d(256, 128, kernel_size=4, stride=1)
+        self.c3 = nn.ConvTranspose2d(512, 256, kernel_size=4, stride=1)
+        self.l1 = nn.Linear(64, 512*20*20)
+
+        self.b1 = nn.BatchNorm2d(128)
+        self.b2 = nn.BatchNorm2d(256)
+        self.b3 = nn.BatchNorm2d(512)
+        self.sigmoid = nn.Sigmoid()
+    
+
+    def forward(self, encoded):
+        encoded = encoded[0]
+        h = F.relu(self.b3(self.l1(encoded).view(-1, 512, 20, 20)))
+        h = F.relu(self.b2(self.c3(h)))
+        h = F.relu(self.b1(self.c2(h)))
+        features = F.relu(self.c1(h))
+        x_hat = self.sigmoid(self.c0(features)) 
+
+        return x_hat
 
 
 class Classifier(nn.Module):
@@ -111,11 +136,12 @@ class ClassificationModel(nn.Module):
     def freeze_encoder(self):
         for param in self.encoder.parameters():
             param.requires_grad = False
-        
         return
     
     def load_pretrained(self, pretrain_pth):
         weights_dict = torch.load(pretrain_pth)
+        weights_dict = {f'encoder.{k}': v for k, v in weights_dict.items()}
+        
         model_dict = self.state_dict()
         
         pretrained_dict = {k: v for k, v in weights_dict.items() if
