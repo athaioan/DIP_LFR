@@ -8,7 +8,5 @@
         ├── data
         │   ├──imagenet_tiny
         │   │   ├── image_tensor.bin        
-        │   │   │   ├── training # train images
-        │   │   │   ├── val # validation images
-        │   │   ├── labels       
+        │   ├──cifar10
         └── ...
