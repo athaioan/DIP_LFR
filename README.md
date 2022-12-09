@@ -1,8 +1,8 @@
 # Module 1 Assignment Learning Feature Representation WASP course 
 
-### Unsupervised pre-training
+## Unsupervised pre-training
 
-## DIM
+### DIM
 
 ```python pre_train_DIM.py```
 
