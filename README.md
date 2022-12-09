@@ -1,7 +1,8 @@
 # Module 1 Assignment Learning Feature Representation WASP course 
 
 ### Unsupervised pre-training
-```python -m pip install -r requirements.txt```
+## DIM
+```python pre_train_DIM.py
 
 ### Dataset format
 
