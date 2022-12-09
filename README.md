@@ -5,9 +5,9 @@
 - Download all the .zip and .odgt files from [CrowdHuman](https://www.crowdhuman.org/) 
 - Unzip the .zip files and set the dataset in the structure shown below
 
-        ├── dataset
-        │   ├──CrowdHuman
-        │   │   ├── images_orignals          
+        ├── data
+        │   ├──imagenet_tiny
+        │   │   ├── image_tensor.bin        
         │   │   │   ├── training # train images
         │   │   │   ├── val # validation images
         │   │   ├── labels       
