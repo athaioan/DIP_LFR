@@ -4,7 +4,7 @@
 
 ## DIM
 
-```python pre_train_DIM.py
+```python pre_train_DIM.py```
 
 ### Dataset format
 
