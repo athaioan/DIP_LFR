@@ -1,9 +1,8 @@
 # Module 1 Assignment Learning Feature Representation WASP course 
 
-### Dataset construction
+### Dataset format
 
-- Download all the .zip and .odgt files from [CrowdHuman](https://www.crowdhuman.org/) 
-- Unzip the .zip files and set the dataset in the structure shown below
+The data structure should look like this. The cifar10 folder will create itself upon running the training scripts. We need to create the imagenet_tiny structure ourselves based the .bin file we were given.
 
         ├── data
         │   ├──imagenet_tiny
