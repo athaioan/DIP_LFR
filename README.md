@@ -1,6 +1,7 @@
 # Module 1 Assignment Learning Feature Representation WASP course 
 
 ## Unsupervised pre-training
+Note the weights will be stored in the "stored" folder
 
 ### DIM
 Unsupervised pre-training on the Tiny ImageNet using the DIM framework (https://arxiv.org/abs/1808.06670)
@@ -12,10 +13,12 @@ Unsupervised pre-training on the Tiny ImageNet using the denoising-AE
 
 ```python pre_train_dAE.py```
 
+
+
 ### Fine Tuning
 Supervised training on the CIFAR10 
 
-```python pre_train_dAE.py```
+```python fine_tune_cifar10.py```
 
 ### Dataset format
 
