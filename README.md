@@ -31,4 +31,4 @@ The data structure should look like this. The cifar10 folder will create itself 
         └── ...
         
 ### Acknowledgements
-The Deep Info Max implementation is based on https://github.com/DuaneNielsen/DeepInfomaxPytorch
+The DIM pre-training uses the pytorch DIM implementation from https://github.com/DuaneNielsen/DeepInfomaxPytorch
