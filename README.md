@@ -1,7 +1,7 @@
 # Module 1 Assignment Learning Feature Representation WASP course 
 
 ## Unsupervised pre-training
-Note the weights will be stored in the "stored" folder
+Completing pre-training will save the network's weight in the "stored" folder (which will be created if does not already exist)
 
 ### DIM
 Unsupervised pre-training on the Tiny ImageNet using the DIM framework (https://arxiv.org/abs/1808.06670)
