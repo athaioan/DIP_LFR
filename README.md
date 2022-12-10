@@ -29,3 +29,6 @@ The data structure should look like this. The cifar10 folder will create itself 
         │   │   ├── image_tensor.bin        
         │   ├──cifar10
         └── ...
+        
+### Acknowledgements
+The Deep Info Max implementation is based on https://github.com/DuaneNielsen/DeepInfomaxPytorch
