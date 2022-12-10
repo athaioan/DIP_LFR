@@ -21,11 +21,13 @@ if __name__ == '__main__':
                         else 'cpu', type=str, help='device')
     parser.add_argument('--lr', default=1e-3, help='learning rate')
     parser.add_argument('--n_epoch', default=20, type=int, help='epochs')
+    # parser.add_argument('--pretrain', default='/home/ioaat57/projects/DIP_LFR/stored/dAE.pth',
+    # parser.add_argument('--pretrain', default='/home/ioaat57/projects/DIP_LFR/stored/DIM.pth',
     parser.add_argument('--pretrain', default=None,
                         help='use pretrain weights')
     parser.add_argument('--fine_tune', default=True, type=bool, 
                         help='fine tune backbone')
-    parser.add_argument('--use_subset', default=True, type=bool, 
+    parser.add_argument('--use_subset', default=False , type=bool, 
                         help='use 5% of the available training data')
     parser.add_argument('--seed', default=0, type=int, 
                         help='seed')
@@ -36,8 +38,6 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
     
-    seed_everything(args.seed)
-
     trainset = CIFAR10('./data/cifar10',  train=True, download=True, 
                        transform=transforms.ToTensor())
 
