@@ -22,7 +22,7 @@ Supervised training on the CIFAR10
 
 ### Dataset format
 
-The data structure should look like this. The cifar10 folder will create itself upon running any of the training scripts. We need to create the imagenet_tiny structure ourselves based the .bin file we were given.
+The data structure should look like this. The cifar10 folder will create itself upon running any of the training scripts. We need to create the imagenet_tiny structure ourselves based using the "image_tensor.bin" file provided in the assignment description.
 
         ├── data
         │   ├──imagenet_tiny
