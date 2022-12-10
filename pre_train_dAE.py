@@ -12,6 +12,7 @@ import statistics as stats
 import argparse
 import os 
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+from utils import read_imagenet_tiny, seed_everything
 
 class DeepInfoMaxLoss(nn.Module):
     def __init__(self, alpha=0.5, beta=1.0, gamma=0.1):
@@ -56,6 +57,9 @@ if __name__ == '__main__':
     parser.add_argument('--batch_size', default=128, type=int, help='batch_size')
     args = parser.parse_args()
 
+    seed_everything(0)
+
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     batch_size = args.batch_size
 
@@ -64,6 +68,10 @@ if __name__ == '__main__':
     # shuffle must be True
     cifar_10_train_dt = CIFAR10('./data/cifar10',  download=True, transform=ToTensor())
     cifar_10_train_l = DataLoader(cifar_10_train_dt, batch_size=batch_size, shuffle=True, drop_last=True,
+                                  pin_memory=torch.cuda.is_available())
+
+    trainset = read_imagenet_tiny(data_path = "/home/ioaat57/projects/DIP_LFR/data/imagenet_tiny/image_tensor.bin")
+    trainset = DataLoader(trainset, batch_size=batch_size, shuffle=True, drop_last=True,
                                   pin_memory=torch.cuda.is_available())
 
     encoder = Encoder().to(device)
@@ -81,10 +89,10 @@ if __name__ == '__main__':
         loss_file = root / Path('loss' + str(epoch_restart) + '.wgt')
         encoder.load_state_dict(torch.load(str(enc_file)))
 
-    for epoch in range(epoch_restart + 1, 50):
-        batch = tqdm(cifar_10_train_l, total=len(cifar_10_train_dt) // batch_size)
+    for epoch in range(epoch_restart + 1, 10):
+        batch = tqdm(trainset, total=len(trainset) // batch_size)
         train_loss = []
-        for x, target in batch:
+        for x in batch:
             
             x = x.to(device)
 
@@ -105,6 +113,8 @@ if __name__ == '__main__':
             # plt.imsave("img_rec.png",x_hat[index].data.cpu().numpy().transpose(1,2,0))
 
     ## saving the encoder
+    if not os.path.isdir("./stored"):
+        os.mkdir("./stored")
     torch.save(encoder.state_dict(), os.path.join("./stored","dAE"+".pth"))
 
     for i in range(15):
@@ -112,4 +122,4 @@ if __name__ == '__main__':
         index = i
         plt.imsave("img_"+str(index)+".png",x[index].data.cpu().numpy().transpose(1,2,0))
         plt.imsave("img_noisy_"+str(index)+".png",(x+noise).clip(0,1)[index].data.cpu().numpy().transpose(1,2,0))
-        plt.imsave("img_rec_"+str(index)+".png",x_hat[index].data.cpu().numpy().transpose(1,2,0)) 
+        plt.imsave("img_rec_"+str(index)+".png",x_hat[index].data.cpu().numpy().transpose(1,2,0))
