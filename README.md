@@ -3,11 +3,19 @@
 ## Unsupervised pre-training
 
 ### DIM
+Unsupervised pre-training on the Tiny ImageNet using the DIM framework (https://arxiv.org/abs/1808.06670)
 
 ```python pre_train_DIM.py```
 
 ### dAE
-```pre_train_dAE.py```
+Unsupervised pre-training on the Tiny ImageNet using the denoising-AE
+
+```python pre_train_dAE.py```
+
+### Fine Tuning
+Supervised training on the CIFAR10 
+
+```python pre_train_dAE.py```
 
 ### Dataset format
 
